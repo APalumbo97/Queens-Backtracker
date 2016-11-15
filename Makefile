@@ -7,4 +7,4 @@ clean:
 	rm out/*.class
 
 run: out/findSolution.class
-	java -cp out findSolution
+	java -cp out findSolution input-files/empty.txt PTUI
