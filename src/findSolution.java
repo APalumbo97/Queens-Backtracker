@@ -1,5 +1,3 @@
-import javafx.application.Application;
-import javafx.stage.Stage;
 import java.io.FileNotFoundException;
 import java.util.Optional;
 
@@ -7,13 +5,13 @@ import java.util.Optional;
  * @author Anthony Palumbo
  * date: 11-14-16
  * description: file that runs the project using boardConfig and backtracker
- * usage: java findSolution <filename> <PTUI or GUI>
+ * usage: java findSolution <filename> <CLI or GUI>
  */
 public class findSolution {
 
     /**
-     * Main function that runs the program with either a PTUI or GUI.
-     * @param args: first argument is the filename, second is PTUI or GUI
+     * Main function that runs the program with either a CLI or GUI.
+     * @param args: first argument is the filename, second is CLI or GUI
      */
     public static void main(String[] args) {
         try {
@@ -21,7 +19,7 @@ public class findSolution {
             backtracker bt = new backtracker();
             double startTime = System.currentTimeMillis();
             Optional<boardConfig> solution = bt.solve(b);
-            if(args[1].equals("PTUI")) {
+            if(args[1].equals("CLI")) {
                 System.out.println("Time taken: " + (System.currentTimeMillis() - startTime)/1000.0 + " seconds.");
 
                 if(solution.isPresent())

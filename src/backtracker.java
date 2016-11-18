@@ -6,13 +6,13 @@ import java.util.Optional;
  * description: backtracker class for Queens-backtracking project,
  * searches for a solution and returns one if it exists.
  */
-public class backtracker {
+class backtracker {
 
     /**
      * Constructor for backtracker.
      */
-    public backtracker() {
-        // Empty Constructor.
+    backtracker() {
+
     }
 
     /**
@@ -20,7 +20,7 @@ public class backtracker {
      * @param bc: a valid configuration
      * @return a solution configuration or null if not available
      */
-    public Optional<boardConfig> solve(boardConfig bc) {
+    Optional<boardConfig> solve(boardConfig bc) {
         if(bc.isGoal()) {
             return Optional.of(bc);
         }
