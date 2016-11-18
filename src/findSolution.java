@@ -1,17 +1,20 @@
-/**
- * @author: Anthony Palumbo
- * date: 11-14-16
- * description: file that runs the project using boardConfig and backtracker
- * usage: java findSolution filename <PTUI or GUI>
- */
-
 import javafx.application.Application;
 import javafx.stage.Stage;
 import java.io.FileNotFoundException;
 import java.util.Optional;
 
-public class findSolution extends Application {
+/**
+ * @author Anthony Palumbo
+ * date: 11-14-16
+ * description: file that runs the project using boardConfig and backtracker
+ * usage: java findSolution <filename> <PTUI or GUI>
+ */
+public class findSolution {
 
+    /**
+     * Main function that runs the program with either a PTUI or GUI.
+     * @param args: first argument is the filename, second is PTUI or GUI
+     */
     public static void main(String[] args) {
         try {
             boardConfig b = new boardConfig(args[0]);
@@ -28,6 +31,7 @@ public class findSolution extends Application {
             }
             else if(args[1].equals("GUI")) {
                 //TODO launch the GUI
+                System.out.println("GUI not implemented yet.");
             }
         }
         catch(FileNotFoundException f) {
@@ -38,8 +42,9 @@ public class findSolution extends Application {
         }
     }
 
-    @Override
-    public void start(Stage stage) throws Exception {
-        //TODO
-    }
+
+//    @Override
+//    public void start(Stage stage) throws Exception {
+//        //TODO
+//    }
 }

@@ -1,14 +1,10 @@
-/**
- * @author: Anthony Palumbo
- * date: 11-14-16
- * description: backtracker class for Queens-backtracking project
- */
-
 import java.util.Optional;
 
 /**
- * Class for the recursive backtracking algorithm.
- * Searches for a solution and returns one if it exists.
+ * @author Anthony Palumbo
+ * date: 11-14-16
+ * description: backtracker class for Queens-backtracking project,
+ * searches for a solution and returns one if it exists.
  */
 public class backtracker {
 
@@ -22,7 +18,7 @@ public class backtracker {
     /**
      * Tries to find a solution for a given configuration.
      * @param bc: a valid configuration
-     * @return: a solution configuration or null if not available
+     * @return a solution configuration or null if not available
      */
     public Optional<boardConfig> solve(boardConfig bc) {
         if(bc.isGoal()) {
