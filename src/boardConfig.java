@@ -65,6 +65,24 @@ class boardConfig {
     }
 
     /**
+     * Getter for private variable dim.
+     * @return the value of dim
+     */
+    int getDim() {
+        return this.dim;
+    }
+
+    /**
+     * Getter for the board
+     * @param r: the row index
+     * @param c: the column index
+     * @return the value at the board
+     */
+    char getBoard(int r, int c) {
+        return this.board[r][c];
+    }
+
+    /**
      * Determines if the cursor can move to the next location or not.
      * @return true if the cursor can move, false if it cannot move
      */
