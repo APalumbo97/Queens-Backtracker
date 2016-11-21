@@ -123,16 +123,18 @@ public class BoardConfiguration {
      */
     Collection<BoardConfiguration> getSuccessors() {
         //TODO add pruning
-        //TODO fix this function
         ArrayList<BoardConfiguration> successors = new ArrayList<>();
         if(canMove()) {
             BoardConfiguration b1 = new BoardConfiguration(this);
             BoardConfiguration b2 = new BoardConfiguration(this);
             b1.moveCursor();
             b2.moveCursor();
-            b2.board[b2.currRow][b2.currCol] = QUEEN;
             successors.add(b1);
-            successors.add(b2);
+            if(b2.board[b2.currRow][b2.currCol] != QUEEN) {
+                b2.board[b2.currRow][b2.currCol] = QUEEN;
+                if(b2.isValid())
+                    successors.add(b2);
+            }
         }
         return successors;
     }
