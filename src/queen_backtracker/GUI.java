@@ -59,18 +59,18 @@ public class GUI extends Application{
         GridPane gp = new GridPane();
         gp.setHgap(5);
         gp.setVgap(5);
-        for(int r = 0; r < dimensions; r++) {
-            for(int c = 0; c < dimensions; c++) {
+        for (int r = 0; r < dimensions; r++) {
+            for (int c = 0; c < dimensions; c++) {
                 Rectangle rec = new Rectangle();
                 rec.setWidth(100);
                 rec.setHeight(100);
                 rec.setArcWidth(20);
                 rec.setArcHeight(20);
-                if(model.getBoard(r, c) == QUEEN) {
+                if (model.getBoard(r, c) == QUEEN) {
                     rec.setFill(queenImage);
-                }
-                else
+                } else {
                     rec.setFill(Color.GRAY);
+                }
                 GridPane.setRowIndex(rec, r);
                 GridPane.setColumnIndex(rec, c);
                 gp.getChildren().addAll(rec);

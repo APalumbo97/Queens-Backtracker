@@ -24,15 +24,14 @@ public class QueenProject {
     public static void main(String[] args) {
         try {
             startBackTracker(args[0]);
-            if(args[1].equals("CLI"))
+            if (args[1].equals("CLI")) {
                 startCLI();
-            else if(args[1].equals("GUI"))
+            } else if (args[1].equals("GUI")) {
                 startGUI(args);
-        }
-        catch(FileNotFoundException f) {
+            }
+        } catch (FileNotFoundException f) {
             System.out.println("Incorrect name for the input file.");
-        }
-        catch(Exception e) {
+        } catch (Exception e) {
             e.printStackTrace(System.out);
         }
     }
@@ -47,12 +46,12 @@ public class QueenProject {
         BackTracker bt = new BackTracker();
         startTime = System.currentTimeMillis();
         Optional<BoardConfiguration> solution = bt.solve(b);
-        if(solution.isPresent()) {
+        if (solution.isPresent()) {
             b = solution.get();
             isSolution = true;
-        }
-        else
+        } else {
             isSolution = false;
+        }
     }
 
     /**
@@ -61,11 +60,11 @@ public class QueenProject {
      */
     private static void startCLI() throws Exception {
         System.out.println("Time taken: " + (System.currentTimeMillis()-startTime/1000.0) + " seconds.");
-        if(isSolution) {
+        if (isSolution) {
             System.out.println("Solution:\n" + b.toString());
-        }
-        else
+        } else {
             System.out.println("No solution!");
+        }
     }
 
     /**

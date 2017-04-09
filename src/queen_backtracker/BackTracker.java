@@ -23,14 +23,13 @@ public class BackTracker {
      * @return a solution configuration or null if not available
      */
     public Optional<BoardConfiguration> solve(BoardConfiguration bc) {
-        if(bc.isGoal()) {
+        if (bc.isGoal()) {
             return Optional.of(bc);
-        }
-        else {
-            for(BoardConfiguration child: bc.getSuccessors()) {
-                if(child.isValid()) {
+        } else {
+            for (BoardConfiguration child: bc.getSuccessors()) {
+                if (child.isValid()) {
                     Optional<BoardConfiguration> s = solve(child);
-                    if(s.isPresent()) {
+                    if (s.isPresent()) {
                         return s;
                     }
                 }

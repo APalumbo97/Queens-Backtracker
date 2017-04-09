@@ -38,14 +38,15 @@ public class BoardConfiguration {
         String line;
         in.nextLine();
         int c;
-        for(int r = 0; r < this.dim; r++) {
+        for (int r = 0; r < this.dim; r++) {
             line = in.nextLine().replaceAll("\\s+", "");
             c = 0;
-            for(char ch: line.toCharArray()) {
-                if(ch == 'Q')
+            for (char ch: line.toCharArray()) {
+                if (ch == 'Q') {
                     this.board[r][c] = QUEEN;
-                else
+                } else {
                     this.board[r][c] = EMPTY;
+                }
                 c++;
             }
         }
@@ -62,7 +63,7 @@ public class BoardConfiguration {
         this.currRow = copy.currRow;
         this.currCol = copy.currCol;
         this.board = new char[this.dim][this.dim];
-        for(int r = 0; r < this.dim; r++) {
+        for (int r = 0; r < this.dim; r++) {
             System.arraycopy(copy.board[r], 0, this.board[r], 0, copy.dim);
         }
     }
@@ -98,18 +99,17 @@ public class BoardConfiguration {
      * @return true if the cursor was moved, false if it cannot be moved
      */
     private boolean moveCursor() {
-        if(!canMove())
+        if (!canMove()) {
             return false;
-        else {
-            if(this.currCol != this.dim-1) {
+        } else {
+            if (this.currCol != this.dim-1) {
                 this.currCol++;
                 return true;
-            }
-            else {
+            } else {
                 this.currCol = 0;
-                if(this.currRow == this.dim-1)
+                if (this.currRow == this.dim-1) {
                     return false;
-                else {
+                } else {
                     this.currRow++;
                     return true;
                 }
@@ -124,15 +124,15 @@ public class BoardConfiguration {
     Collection<BoardConfiguration> getSuccessors() {
         //TODO add pruning
         ArrayList<BoardConfiguration> successors = new ArrayList<>();
-        if(canMove()) {
+        if (canMove()) {
             BoardConfiguration b1 = new BoardConfiguration(this);
             BoardConfiguration b2 = new BoardConfiguration(this);
             b1.moveCursor();
             b2.moveCursor();
             successors.add(b1);
-            if(b2.board[b2.currRow][b2.currCol] != QUEEN) {
+            if (b2.board[b2.currRow][b2.currCol] != QUEEN) {
                 b2.board[b2.currRow][b2.currCol] = QUEEN;
-                if(b2.isValid())
+                if (b2.isValid())
                     successors.add(b2);
             }
         }
@@ -146,66 +146,70 @@ public class BoardConfiguration {
     boolean isValid() {
         // Counts the number of queens in each row and column
         int ctr;
-        for(int r = 0; r < this.dim; r++) {
+        for (int r = 0; r < this.dim; r++) {
             ctr = 0;
-            for(int c = 0; c < this.dim; c++) {
-                if(this.board[r][c] == QUEEN)
+            for (int c = 0; c < this.dim; c++) {
+                if (this.board[r][c] == QUEEN) {
                     ctr++;
+                }
             }
-            if(ctr > 1)
+            if (ctr > 1) {
                 return false;
+            }
         }
-        for(int c = 0; c < this.dim; c++) {
+        for (int c = 0; c < this.dim; c++) {
             ctr = 0;
-            for(int r = 0; r < this.dim; r++) {
-                if(this.board[r][c] == QUEEN)
+            for (int r = 0; r < this.dim; r++) {
+                if (this.board[r][c] == QUEEN) {
                     ctr++;
+                }
             }
-            if(ctr > 1)
+            if (ctr > 1) {
                 return false;
+            }
         }
 
         //Checks diagonals
         int row, col;
-        for(int r = 0; r < this.dim; r++) {
-            for(int c = 0; c < this.dim; c++) {
-                if(this.board[r][c] == QUEEN) {
+        for (int r = 0; r < this.dim; r++) {
+            for (int c = 0; c < this.dim; c++) {
+                if (this.board[r][c] == QUEEN) {
                     row = r + 1;
                     col = c + 1;
-                    while((row < this.dim)&&(col < this.dim)) {
-                        if(this.board[row][col] == QUEEN)
+                    while ((row < this.dim)&&(col < this.dim)) {
+                        if (this.board[row][col] == QUEEN) {
                             return false;
-                        else {
+                        } else {
                             row++;
                             col++;
                         }
                     }
                     row = r + 1;
                     col = c - 1;
-                    while((row < this.dim)&&(col >= 0)) {
-                        if(this.board[row][col] == QUEEN)
+                    while ((row < this.dim)&&(col >= 0)) {
+                        if (this.board[row][col] == QUEEN) {
                             return false;
-                        else {
+                        } else {
                             row++;
                             col--;
                         }
                     }
                     row = r - 1;
                     col = c + 1;
-                    while((row >= 0)&&(col < this.dim)) {
-                        if(this.board[row][col] == QUEEN)
+                    while ((row >= 0)&&(col < this.dim)) {
+                        if (this.board[row][col] == QUEEN) {
                             return false;
-                        else {
+                        } else {
                             row--;
                             col++;
                         }
                     }
                     row = r - 1;
                     col = c - 1;
-                    while((row >= 0)&&(col >= 0)) {
-                        if(this.board[row][col] == QUEEN)
+                    while ((row >= 0)&&(col >= 0)) {
+                        if (this.board[row][col] == QUEEN) {
                             return false;
-                        else {
+                        } else {
                             row--;
                             col--;
                         }
@@ -221,28 +225,32 @@ public class BoardConfiguration {
      * @return true if it is a solution, false if not
      */
     boolean isGoal() {
-        if(!isValid())
+        if (!isValid()) {
             return false;
-        else {
+        } else {
             // Counts the number of queens in each row and column
             int ctr;
-            for(int r = 0; r < this.dim; r++) {
+            for (int r = 0; r < this.dim; r++) {
                 ctr = 0;
-                for(int c = 0; c < this.dim; c++) {
-                    if(this.board[r][c] == QUEEN)
+                for (int c = 0; c < this.dim; c++) {
+                    if (this.board[r][c] == QUEEN) {
                         ctr++;
+                    }
                 }
-                if(ctr != 1)
+                if (ctr != 1) {
                     return false;
+                }
             }
-            for(int c = 0; c < this.dim; c++) {
+            for (int c = 0; c < this.dim; c++) {
                 ctr = 0;
-                for(int r = 0; r < this.dim; r++) {
-                    if(this.board[r][c] == QUEEN)
+                for (int r = 0; r < this.dim; r++) {
+                    if (this.board[r][c] == QUEEN) {
                         ctr++;
+                    }
                 }
-                if(ctr != 1)
+                if (ctr != 1) {
                     return false;
+                }
             }
         }
         return true;
@@ -254,8 +262,8 @@ public class BoardConfiguration {
      */
     public String toString() {
         String output = this.dim + "x" + this.dim + "\n";
-        for(int r = 0; r < this.dim; r++) {
-            for(int c = 0; c < this.dim; c++) {
+        for (int r = 0; r < this.dim; r++) {
+            for (int c = 0; c < this.dim; c++) {
                 output += this.board[r][c] + " ";
             }
             output += "\n";
