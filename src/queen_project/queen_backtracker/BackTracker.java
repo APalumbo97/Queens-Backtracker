@@ -1,11 +1,11 @@
-package queen_backtracker;
+package queen_project.queen_backtracker;
 
 import java.util.Optional;
 
 /**
  * @author Anthony Palumbo
  * date: 11-14-16
- * description: backtracker class for Queens-backtracking project,
+ * description: backtracker class for Queens-Backtracker project,
  * searches for a solution and returns one if it exists.
  */
 public class BackTracker {
@@ -13,9 +13,7 @@ public class BackTracker {
     /**
      * Constructor for back tracker.
      */
-    public BackTracker() {
-
-    }
+    public BackTracker() {}
 
     /**
      * Tries to find a solution for a given configuration.

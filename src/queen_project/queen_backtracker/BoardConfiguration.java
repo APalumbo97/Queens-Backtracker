@@ -1,7 +1,10 @@
-package queen_backtracker;
+package queen_project.queen_backtracker;
+
+import queen_project.QueenProject;
 
 import java.io.File;
 import java.io.FileNotFoundException;
+import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Scanner;
@@ -28,8 +31,14 @@ public class BoardConfiguration {
      * @param filename: the name of the input file to read
      * @throws FileNotFoundException: throws this exception if the file does not exist
      */
-    public BoardConfiguration(String filename) throws FileNotFoundException {
-        Scanner in = new Scanner(new File(filename));
+    public BoardConfiguration(String filename, boolean resource) throws FileNotFoundException {
+        Scanner in;
+        if (resource) {
+            InputStream input = QueenProject.class.getClassLoader().getResourceAsStream("empty.txt");
+            in = new Scanner(input);
+        } else {
+            in = new Scanner(new File(filename));
+        }
         this.dim = in.nextInt();
         this.currRow = 0;
         this.currCol = 0;
@@ -122,7 +131,6 @@ public class BoardConfiguration {
      * @return an array list of the next successors
      */
     Collection<BoardConfiguration> getSuccessors() {
-        //TODO add pruning
         ArrayList<BoardConfiguration> successors = new ArrayList<>();
         if (canMove()) {
             BoardConfiguration b1 = new BoardConfiguration(this);

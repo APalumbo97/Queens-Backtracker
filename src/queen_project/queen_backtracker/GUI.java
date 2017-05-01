@@ -1,4 +1,4 @@
-package queen_backtracker;
+package queen_project.queen_backtracker;
 
 import javafx.application.Application;
 import javafx.geometry.Insets;
@@ -12,6 +12,8 @@ import javafx.scene.shape.Rectangle;
 import javafx.scene.text.Font;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
+import queen_project.QueenProject;
+
 
 public class GUI extends Application{
 
@@ -22,7 +24,7 @@ public class GUI extends Application{
     private final static char QUEEN = BoardConfiguration.QUEEN;
 
     /**
-     * Starts the GUI
+     * Starts the GUI.
      * @param stage: the initial stage
      * @throws Exception any exception that occurs
      */
@@ -36,7 +38,7 @@ public class GUI extends Application{
     }
 
     /**
-     * Build the scene
+     * Build the scene.
      * @return a VBox
      */
     private VBox buildScene() {
@@ -54,7 +56,14 @@ public class GUI extends Application{
      * @return a GridPane
      */
     private GridPane buildBoard() {
-        Image q = new Image("file:images/queen.jpg");
+        Image q;
+        try {
+            q = new Image(QueenProject.class.getResourceAsStream("/queen.jpg"));
+        } catch (Exception e) {
+            // Runs during testing
+            q = new Image("file:images/queen.jpg");
+        }
+
         ImagePattern queenImage = new ImagePattern(q);
         GridPane gp = new GridPane();
         gp.setHgap(5);

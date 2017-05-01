@@ -1,6 +1,9 @@
-import queen_backtracker.BackTracker;
-import queen_backtracker.BoardConfiguration;
-import queen_backtracker.GUI;
+package queen_project;
+
+import queen_project.queen_backtracker.BackTracker;
+import queen_project.queen_backtracker.BoardConfiguration;
+import queen_project.queen_backtracker.GUI;
+
 import java.io.FileNotFoundException;
 import java.util.Optional;
 
@@ -8,7 +11,7 @@ import java.util.Optional;
  * @author Anthony Palumbo
  * date: 11-20-16
  * description: Program that runs either a CLI or GUI
- * usage: java <input-filename> <CLI or GUI>
+ * usage: java -jar QueenProject.jar <input-filename> <CLI or GUI>
  */
 public class QueenProject {
 
@@ -23,16 +26,28 @@ public class QueenProject {
      */
     public static void main(String[] args) {
         try {
+            if (args.length == 0) {
+                System.err.println("Usage: java -jar QueenProject.jar <input-filename> <CLI or GUI>");
+                System.err.println("Use \"default\" for the input-filename to use an empty file.");
+                System.exit(1);
+            }
             startBackTracker(args[0]);
-            if (args[1].equals("CLI")) {
-                startCLI();
-            } else if (args[1].equals("GUI")) {
-                startGUI(args);
+            switch (args[1]) {
+                case "CLI":
+                    startCLI(); break;
+                case "GUI":
+                    startGUI(args); break;
+                default:
+                    System.err.println("Usage: java -jar QueenProject.jar <input-filename> <CLI or GUI>");
+                    System.err.println("Use \"default\" for the input-filename to use empty.txt");
+                    System.exit(0);
             }
         } catch (FileNotFoundException f) {
-            System.out.println("Incorrect name for the input file.");
+            System.err.println("Incorrect name for the input file.");
+            System.exit(1);
         } catch (Exception e) {
             e.printStackTrace(System.out);
+            System.exit(1);
         }
     }
 
@@ -42,7 +57,11 @@ public class QueenProject {
      * @throws FileNotFoundException: when the file cannot be found
      */
     private static void startBackTracker(String filename) throws FileNotFoundException {
-        b = new BoardConfiguration(filename);
+        if (filename.equals("default")) {
+            b = new BoardConfiguration(filename, true);
+        } else {
+            b = new BoardConfiguration(filename, false);
+        }
         BackTracker bt = new BackTracker();
         startTime = System.currentTimeMillis();
         Optional<BoardConfiguration> solution = bt.solve(b);
